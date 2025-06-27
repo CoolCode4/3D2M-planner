@@ -12,7 +12,7 @@
 
 ros::Publisher global_map_pub;
 ros::Publisher pose_pub;
-double cloud_resolution;
+double cloud_resolution; //控制点云密度，默认0.004
 pcl::PointCloud<pcl::PointXYZ> global_map_pcl_cloud;
 
 using namespace Eigen;

@@ -1,0 +1,8 @@
+prefix=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel
+
+Name: rviz_plugin_tutorials
+Description: Description of rviz_plugin_tutorials
+Version: 0.11.0
+Cflags: -I/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel/include
+Libs: -L${prefix}/lib -lrviz_plugin_tutorials
+Requires: message_runtime

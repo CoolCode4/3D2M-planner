@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   rviz_plugin_tutorials
 )
-find_package(PCL 1.8 REQUIRED)
+find_package(PCL 1.10 REQUIRED)
 find_package(Eigen3 REQUIRED)
 #find_package(OpenCV REQUIRED)
 

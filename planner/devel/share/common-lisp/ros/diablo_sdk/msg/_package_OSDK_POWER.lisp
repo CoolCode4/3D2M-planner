@@ -1,0 +1,10 @@
+(cl:in-package diablo_sdk-msg)
+(cl:export '(BATTERY_VOLTAGE-VAL
+          BATTERY_VOLTAGE
+          BATTERY_CURRENT-VAL
+          BATTERY_CURRENT
+          BATTERY_CAPACITOR_ENERGY-VAL
+          BATTERY_CAPACITOR_ENERGY
+          BATTERY_POWER_PERCENT-VAL
+          BATTERY_POWER_PERCENT
+))

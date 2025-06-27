@@ -1,0 +1,8 @@
+prefix=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel
+
+Name: planner_manager
+Description: Description of planner_manager
+Version: 0.0.0
+Cflags: -I/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel/include -I/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/planner_manager/include
+Libs: -L${prefix}/lib -lplanner_manager
+Requires: mpc map_manager planner_algorithm roscpp rospy std_msgs sensor_msgs geometry_msgs message_runtime

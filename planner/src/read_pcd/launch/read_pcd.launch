@@ -6,7 +6,8 @@
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/down.pcd"/> -->
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/park0.3.pcd"/> -->
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/park2layer0.3.pcd"/> -->
-	  <param name="map/map_file" value="$(find read_pcd)/PCDFiles/scene20.2.pcd"/>
+	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/scene20.2.pcd"/> -->
+	  <param name="map/map_file" value="$(find read_pcd)/PCDFiles/0405_csc1floor_terrain.pcd"/>
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/city_t1.2.pcd"/> -->
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/spiral0.3_2.pcd"/> -->
 	  <!-- <param name="map/map_file" value="$(find read_pcd)/PCDFiles/indoorBigWork.pcd"/> -->

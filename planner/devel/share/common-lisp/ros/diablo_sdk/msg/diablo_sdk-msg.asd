@@ -1,0 +1,23 @@
+
+(cl:in-package :asdf)
+
+(defsystem "diablo_sdk-msg"
+  :depends-on (:roslisp-msg-protocol :roslisp-utils )
+  :components ((:file "_package")
+    (:file "Diablo_Ctrl" :depends-on ("_package_Diablo_Ctrl"))
+    (:file "_package_Diablo_Ctrl" :depends-on ("_package"))
+    (:file "OSDK_ACCL" :depends-on ("_package_OSDK_ACCL"))
+    (:file "_package_OSDK_ACCL" :depends-on ("_package"))
+    (:file "OSDK_GYRO" :depends-on ("_package_OSDK_GYRO"))
+    (:file "_package_OSDK_GYRO" :depends-on ("_package"))
+    (:file "OSDK_LEGMOTORS" :depends-on ("_package_OSDK_LEGMOTORS"))
+    (:file "_package_OSDK_LEGMOTORS" :depends-on ("_package"))
+    (:file "OSDK_POWER" :depends-on ("_package_OSDK_POWER"))
+    (:file "_package_OSDK_POWER" :depends-on ("_package"))
+    (:file "OSDK_QUATERNION" :depends-on ("_package_OSDK_QUATERNION"))
+    (:file "_package_OSDK_QUATERNION" :depends-on ("_package"))
+    (:file "OSDK_RC" :depends-on ("_package_OSDK_RC"))
+    (:file "_package_OSDK_RC" :depends-on ("_package"))
+    (:file "OSDK_STATUS" :depends-on ("_package_OSDK_STATUS"))
+    (:file "_package_OSDK_STATUS" :depends-on ("_package"))
+  ))

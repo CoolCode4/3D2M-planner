@@ -1,3 +1,10 @@
+/*
+  1.定义模型基本参数mesh
+  2.发布odom_mesh，订阅waypoint odom
+  3.odom回调函数（核心），根据传入的odom话题，计算并发布Marker更新Rviz中机器人模型（模拟机器人模型）
+*/
+
+
 #include <fake_diablo/fake_model.hpp>
 
 void ModelManager::init(ros::NodeHandle &nh)

@@ -1,0 +1,8 @@
+prefix=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel
+
+Name: globalmap_gene
+Description: Description of globalmap_gene
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

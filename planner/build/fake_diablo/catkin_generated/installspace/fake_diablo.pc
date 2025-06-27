@@ -1,0 +1,8 @@
+prefix=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/install
+
+Name: fake_diablo
+Description: Description of fake_diablo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

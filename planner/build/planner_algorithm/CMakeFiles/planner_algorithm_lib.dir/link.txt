@@ -1,0 +1,1 @@
+/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,libplanner_algorithm_lib.so -o /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel/lib/libplanner_algorithm_lib.so CMakeFiles/planner_algorithm_lib.dir/src/front_end_Astar.cpp.o CMakeFiles/planner_algorithm_lib.dir/src/back_end_optimizer.cpp.o 

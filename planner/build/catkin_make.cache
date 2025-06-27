@@ -1,0 +1,2 @@
+diablo-onboard-sdk-with-serial:fake_diablo:fake_ugv:globalmap_gene:map_manager:mpc:planner_algorithm:planner_manager:read_pcd:rviz_plugin_tutorials:rviz_plugins
+-DCMAKE_BUILD_TYPE=Release -DCATKIN_DEVEL_PREFIX=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel -DCMAKE_INSTALL_PREFIX=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/install -G Unix Makefiles

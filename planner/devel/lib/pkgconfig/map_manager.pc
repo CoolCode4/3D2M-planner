@@ -1,0 +1,8 @@
+prefix=/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel
+
+Name: map_manager
+Description: Description of map_manager
+Version: 0.0.0
+Cflags: -I/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/map_manager/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs sensor_msgs geometry_msgs
