@@ -1,3 +1,11 @@
+/*
+    1.这个代码是通过code生成一个仿真的场景
+    2.包含基本单元生成geneXXX：长方体、三角形斜坡、平直道路、三维螺旋坡道、波浪形平面、圆柱体
+    (基本单元会加入一个随机噪声，轻微抖动更加真实)
+    3.mapXGene：地图生成，通过geneXXX组合生成需要的场景
+    4.pubGlobalMap：将生成的地图发布出去
+*/
+
 #include <ros/ros.h>
 #include <Eigen/Eigen> 
 #include <pcl/point_cloud.h>
@@ -17,7 +25,7 @@ pcl::PointCloud<pcl::PointXYZ> global_map_pcl_cloud;
 
 using namespace Eigen;
 
-
+//
 void geneWall(double ori_x , double ori_y , double length, double width,double height)
 {
     pcl::PointXYZ  s_point;

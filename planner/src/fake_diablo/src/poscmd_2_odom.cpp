@@ -9,7 +9,7 @@
 
 #include <geometry_msgs/PoseStamped.h>
 
-
+//虚拟出一个odom
 using namespace std;
 using namespace Eigen;
 
@@ -20,7 +20,7 @@ ros::Publisher  odom_pub;
 
 geometry_msgs::Pose velocity_command;
 nav_msgs::Odometry last_odom;
-
+//从anchr point接收最初位置，last odom
 double p_init_x, p_init_y, p_init_z;
 double max_height, min_height;
 double time_resolution = 0.01;

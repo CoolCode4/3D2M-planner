@@ -1,7 +1,7 @@
 /*
   1.定义模型基本参数mesh
   2.发布odom_mesh，订阅waypoint odom
-  3.odom回调函数（核心），根据传入的odom话题，计算并发布Marker更新Rviz中机器人模型（模拟机器人模型）
+  3.odom回调函数（核心），根据传入的odom话题，计算并发布Marker更新Rviz中机器人模型（模拟机器人模型），类似渲染
 */
 
 
@@ -13,16 +13,17 @@ void ModelManager::init(ros::NodeHandle &nh)
     nh.param("ugv/ugv_l",ugv_l,0.6);
     nh.param("ugv/ugv_w",ugv_w,0.4);
     nh.param("ugv/ugv_h",ugv_h,0.3);
-    nh.param("ugv/mesh" ,mesh_resource,   std::string("package://fake_diablo/param/car.dae"));
-    nh.param("ugv/mesh2" ,mesh_resource2, std::string("package://fake_diablo/param/car.dae"));
-    nh.param("ugv/mesh3" ,mesh_resource3, std::string("package://fake_diablo/param/car.dae"));
-    nh.param("ugv/mesh4" ,mesh_resource4, std::string("package://fake_diablo/param/car.dae"));
+    nh.param("ugv/mesh" ,mesh_resource,   std::string("package://fake_diablo/param/body.dae"));
+    nh.param("ugv/mesh2" ,mesh_resource2, std::string("package://fake_diablo/param/leg.dae"));
+    nh.param("ugv/mesh3" ,mesh_resource3, std::string("package://fake_diablo/param/mid.dae"));
+    nh.param("ugv/mesh4" ,mesh_resource4, std::string("package://fake_diablo/param/wheels.dae"));
     nh.param("ugv/frame",frame,std::string("world"));
 
     nh.param("max_height",max_height, 1.0);
 
     /* callback */
     visugv_pub    = nh.advertise<visualization_msgs::Marker>("odom_mesh", 100,true);
+    //机器人可视化模型Rviz
     waypoints_sub = nh.subscribe("waypoints", 1, &ModelManager::rcvWaypointsCallback, this);
     odom_sub      = nh.subscribe("odom", 1, &ModelManager::odomCallback, this);
 }
@@ -35,6 +36,7 @@ void ModelManager::odomCallback(const nav_msgs::OdometryConstPtr& odom)
     double floor_h = 0;
     static double w_ang = 0;
     w_ang +=  odom->twist.twist.angular.y * 0.1 ;
+    //利用 Odometry 消息中Y轴的角速度来模拟轮子的旋转角度
     floor_h = odom->twist.twist.angular.z;
     //w_ang += 0.05;
     visualization_msgs::Marker WpMarker;
@@ -60,9 +62,12 @@ void ModelManager::odomCallback(const nav_msgs::OdometryConstPtr& odom)
 
     Eigen::Vector3d eulerAngle = q.matrix().eulerAngles(2,1,0);
     Eigen::Matrix3d       R(q);
-		double odom_yaw 	    = atan2(R.col(0)[1],R.col(0)[0]); 
+		double odom_yaw 	    = atan2(R.col(0)[1],R.col(0)[0]); //从旋转矩阵得到xy平面的朝向
     if(odom_yaw > 0){eulerAngle[0] *= -1;} 
-
+    /*
+    同一个旋转姿态可以用不同的欧拉角exp：45°and-315°
+    odom_
+    */
     Eigen::AngleAxisd rollTrans(Eigen::AngleAxisd( eulerAngle[1],Eigen::Vector3d::UnitX()));
     Eigen::AngleAxisd pitchTrans(Eigen::AngleAxisd(-eulerAngle[0],Eigen::Vector3d::UnitY()));
     Eigen::AngleAxisd yawTrans(Eigen::AngleAxisd(eulerAngle[2],Eigen::Vector3d::UnitZ())); 
@@ -80,7 +85,7 @@ void ModelManager::odomCallback(const nav_msgs::OdometryConstPtr& odom)
     //std::cout<<"theta = " <<t<<std::endl;
     //Eigen::Quaterniond qy(0, sin(t),0,cos(t));
 
-    double d = max_height - odom -> pose.pose.position.z;
+    double d = max_height - odom -> pose.pose.position.z; //下蹲程度
     //d = t;
     //Eigen::Quaterniond qx0(cos(-d/1.5),sin(-d/1.5),0,0);
     //Eigen::Quaterniond qx1(cos(d/1.5),sin(d/1.5),0,0);

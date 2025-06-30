@@ -5,6 +5,10 @@
     <arg name="init_y" default="1.0"/>
     <arg name="init_z" default="0.5"/>
 
+        <!--
+               fake diablo是模拟物理状态，接受cmd，发布odom
+               fake model模仿无例外性（因为不在gazebo仿真） 
+        -->
     <node pkg="fake_diablo" name="fake_diablo" type="fake_diablo" output="screen">
             <param name="max_height" value="1.0" />
 
