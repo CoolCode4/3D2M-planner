@@ -165,11 +165,10 @@ struct Definition< ::planner_manager::DVHcontrol_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "\n"
-"Header header\n"
-"float64 left_wheel_vel\n"
-"float64 right_wheel_vel\n"
-"float64 vetical_vel\n"
+    return "Header header                # ROS标准消息头（包含时间戳、坐标系等）\n"
+"float64 left_wheel_vel       # 左轮速度\n"
+"float64 right_wheel_vel      # 右轮速度\n"
+"float64 vetical_vel          # 垂直方向速度\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
 "# Standard metadata for higher-level stamped data types.\n"

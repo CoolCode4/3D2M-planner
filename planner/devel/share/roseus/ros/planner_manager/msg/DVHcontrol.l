@@ -91,11 +91,10 @@
 (setf (get planner_manager::DVHcontrol :md5sum-) "0c56293876f7e62ba1eb4b891f0f432e")
 (setf (get planner_manager::DVHcontrol :datatype-) "planner_manager/DVHcontrol")
 (setf (get planner_manager::DVHcontrol :definition-)
-      "
-Header header
-float64 left_wheel_vel
-float64 right_wheel_vel
-float64 vetical_vel
+      "Header header                # ROS标准消息头（包含时间戳、坐标系等）
+float64 left_wheel_vel       # 左轮速度
+float64 right_wheel_vel      # 右轮速度
+float64 vetical_vel          # 垂直方向速度
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.

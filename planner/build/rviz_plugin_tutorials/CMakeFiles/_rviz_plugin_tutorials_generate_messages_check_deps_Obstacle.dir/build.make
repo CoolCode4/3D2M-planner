@@ -67,7 +67,7 @@ include rviz_plugin_tutorials/CMakeFiles/_rviz_plugin_tutorials_generate_message
 include rviz_plugin_tutorials/CMakeFiles/_rviz_plugin_tutorials_generate_messages_check_deps_Obstacle.dir/progress.make
 
 rviz_plugin_tutorials/CMakeFiles/_rviz_plugin_tutorials_generate_messages_check_deps_Obstacle:
-	cd /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/build/rviz_plugin_tutorials && ../catkin_generated/env_cached.sh /bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py rviz_plugin_tutorials /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg geometry_msgs/Vector3:std_msgs/Header:rviz_plugin_tutorials/ObstaclePose
+	cd /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/build/rviz_plugin_tutorials && ../catkin_generated/env_cached.sh /bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py rviz_plugin_tutorials /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg rviz_plugin_tutorials/ObstaclePose:std_msgs/Header:geometry_msgs/Vector3
 
 _rviz_plugin_tutorials_generate_messages_check_deps_Obstacle: rviz_plugin_tutorials/CMakeFiles/_rviz_plugin_tutorials_generate_messages_check_deps_Obstacle
 _rviz_plugin_tutorials_generate_messages_check_deps_Obstacle: rviz_plugin_tutorials/CMakeFiles/_rviz_plugin_tutorials_generate_messages_check_deps_Obstacle.dir/build.make

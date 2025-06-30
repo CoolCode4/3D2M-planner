@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/install/lib;/opt/ros/noetic/lib;/home/barr1yuan/lqc2_ws/devel/lib;/home/barr1yuan/lqc_ws/devel/lib)
+    foreach(path /home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/install/lib;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel/lib;/opt/ros/noetic/lib;/home/barr1yuan/lqc2_ws/devel/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

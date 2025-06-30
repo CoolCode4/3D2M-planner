@@ -12,11 +12,10 @@ class DVHcontrol(genpy.Message):
   _md5sum = "0c56293876f7e62ba1eb4b891f0f432e"
   _type = "planner_manager/DVHcontrol"
   _has_header = True  # flag to mark the presence of a Header object
-  _full_text = """
-Header header
-float64 left_wheel_vel
-float64 right_wheel_vel
-float64 vetical_vel
+  _full_text = """Header header                # ROS标准消息头（包含时间戳、坐标系等）
+float64 left_wheel_vel       # 左轮速度
+float64 right_wheel_vel      # 右轮速度
+float64 vetical_vel          # 垂直方向速度
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.

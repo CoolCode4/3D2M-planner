@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = r'/opt/ros/noetic;/opt/ros/noetic;/home/barr1yuan/lqc2_ws/devel;/home/barr1yuan/lqc_ws/devel;/opt/intel/oneapi/tbb/2022.0/env/..;/opt/intel/oneapi/mkl/2025.0/lib/cmake;/opt/intel/oneapi/compiler/2025.0'.split(';')
+            CMAKE_PREFIX_PATH = r'/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/devel;/opt/ros/noetic;/home/barr1yuan/lqc2_ws/devel;/opt/intel/oneapi/mkl/latest;/opt/intel/oneapi/mkl/latest;/opt/intel/oneapi/tbb/2022.0/env/..;/opt/intel/oneapi/mkl/2025.0/lib/cmake;/opt/intel/oneapi/ipp/2021.11/lib/cmake/ipp;/opt/intel/oneapi/dpl/2022.5/lib/cmake/oneDPL;/opt/intel/oneapi/dnnl/2024.1/lib/cmake;/opt/intel/oneapi/dal/2024.2;/opt/intel/oneapi/compiler/2025.0'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

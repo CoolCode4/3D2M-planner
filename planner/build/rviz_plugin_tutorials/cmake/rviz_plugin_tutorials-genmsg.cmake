@@ -19,7 +19,7 @@ add_custom_target(rviz_plugin_tutorials_generate_messages ALL)
 
 get_filename_component(_filename "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg" NAME_WE)
 add_custom_target(_rviz_plugin_tutorials_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "rviz_plugin_tutorials" "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg" "geometry_msgs/Vector3:std_msgs/Header:rviz_plugin_tutorials/ObstaclePose"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "rviz_plugin_tutorials" "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg" "rviz_plugin_tutorials/ObstaclePose:std_msgs/Header:geometry_msgs/Vector3"
 )
 
 get_filename_component(_filename "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg" NAME_WE)
@@ -36,7 +36,7 @@ add_custom_target(_rviz_plugin_tutorials_generate_messages_check_deps_${_filenam
 _generate_msg_cpp(rviz_plugin_tutorials
   "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg"
+  "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/rviz_plugin_tutorials
 )
 _generate_msg_cpp(rviz_plugin_tutorials
@@ -77,7 +77,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS rviz_plugin_tutorials_generate_mess
 _generate_msg_eus(rviz_plugin_tutorials
   "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg"
+  "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/rviz_plugin_tutorials
 )
 _generate_msg_eus(rviz_plugin_tutorials
@@ -118,7 +118,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS rviz_plugin_tutorials_generate_mess
 _generate_msg_lisp(rviz_plugin_tutorials
   "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg"
+  "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/rviz_plugin_tutorials
 )
 _generate_msg_lisp(rviz_plugin_tutorials
@@ -159,7 +159,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS rviz_plugin_tutorials_generate_mess
 _generate_msg_nodejs(rviz_plugin_tutorials
   "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg"
+  "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/rviz_plugin_tutorials
 )
 _generate_msg_nodejs(rviz_plugin_tutorials
@@ -200,7 +200,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS rviz_plugin_tutorials_generate_mess
 _generate_msg_py(rviz_plugin_tutorials
   "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/Obstacle.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg"
+  "/home/barr1yuan/workspaces/3D2M_ws/src/3D2M-planner/planner/src/rviz_plugin_tutorials/msg/ObstaclePose.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Vector3.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/rviz_plugin_tutorials
 )
 _generate_msg_py(rviz_plugin_tutorials
