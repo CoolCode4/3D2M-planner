@@ -18,8 +18,8 @@
   <group if="$(arg sim)">
     <node pkg="kimatic_simulator" type="kimatic_simulator_node" name="kimatic_simulator_node" output="screen" required="true">
       <remap from ="~command" to="$(arg cmd_topic)"/>
-      <param name="simulator/max_omega" value="2.4"  type="double"/>
-      <param name="simulator/max_speed" value="5.0"  type="double"/>
+      <param name="simulator/max_omega" value="1.0"  type="double"/>
+      <param name="simulator/max_speed" value="1.0"  type="double"/>
       <remap from="~odometry" to="$(arg odom_topic)"/>
     </node>
 

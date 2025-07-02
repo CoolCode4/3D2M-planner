@@ -1,6 +1,14 @@
 #include "cubic_spline_planner.h"
 #include <iostream>
-
+/*三次多项式拟合曲线
+需要边界条件：因为需要满足未知数个数等于方程个数
+自然边界：边界加速度为0
+固定边界：边界速度为设定值（适合轨迹规划）
+非边界点边界：三阶导数急动度相等，相当于给出一个宽泛条件
+如何推导：每个区间左右侧点代入-连接点一二阶导连续，边界点，得到矩阵，发现只需要得到c的值，就可以得到其他参数值
+如何计算Ac=B：Cx = A.lu().solve(bx);
+矩阵特性：自然边界的00 ii位置是1
+*/
 cubic_spline_planner::cubic_spline_planner(const vector<double>& _x, const vector<double>& _y, const double& _ds) \
 	:x(_x), y(_y), ds(_ds), t{0} \
 	{ 
@@ -29,10 +37,12 @@ vector<VectorXd> cubic_spline_planner::get_coeff(void)
 	A.row(0)[0] = 1.0;
 	for (int i = 0; i < n - 2; i++)
 	{
+		//套公式
 		A.row(i + 1)[i + 1] = 2.0*(h[i] + h[i + 1]);
 		A.row(i + 1)[i] = h[i];
 		A.row(i)[i + 1] = h[i];
 	}
+	//固定边界
 	A.row(0)[1] = 0.0;
 	A.row(n - 1)[n - 2] = 0.0;
 	A.row(n - 2)[n - 1] = h[n - 2];

@@ -8,30 +8,31 @@ pcl::KdTreeFLANN<pcl::PointXY> kdtree;
 
 void MPC::init(ros::NodeHandle &nh)
 {
-    nh.param("mpc/du_threshold", du_th, -1.0);
-    nh.param("mpc/dt", dt, -1.0);
-    nh.param("mpc/max_iter", max_iter, -1);
-    nh.param("mpc/predict_steps", T, -1);
-    nh.param("mpc/delay_num", delay_num, -1);
-    nh.param("mpc/max_omega", max_omega, -1.0);
-    nh.param("mpc/max_domega", max_domega, -1.0);
-    nh.param("mpc/max_speed", max_speed, -1.0);
-    nh.param("mpc/max_accel", max_accel, -1.0);
-    nh.param("mpc/tolerance", tolerance, 0.1);
-    nh.param("mpc/tv_dist", tv_dist, -1.0);
-    nh.param("mpc/in_test", in_test, false);
-    nh.param("mpc/in_mocap", in_mocap, false);
-    nh.param("mpc/in_bk", in_bk, false);
-    nh.param("mpc/control_a", control_a, false);
-    nh.param<std::vector<double>>("mpc/matrix_q", Q, std::vector<double>());
-    nh.param<std::vector<double>>("mpc/matrix_r", R, std::vector<double>());
-    nh.param<std::vector<double>>("mpc/matrix_rd", Rd, std::vector<double>());
-    nh.param<string>("mpc/test_traj", test_traj, "xxx");
+    ROS_INFO("MPC init started.");
+    nh.param("mpc/du_threshold", du_th, -1.0);           // 控制量变化收敛阈值（MPC迭代停止条件）
+    nh.param("mpc/dt", dt, -1.0);                        // MPC控制步长（时间间隔，单位：秒）
+    nh.param("mpc/max_iter", max_iter, -1);              // MPC最大迭代次数
+    nh.param("mpc/predict_steps", T, -1);                // 预测步数（MPC预测未来多少步）
+    nh.param("mpc/delay_num", delay_num, -1);            // 控制延迟步数（补偿系统延迟）
+    nh.param("mpc/max_omega", max_omega, -1.0);          // 最大角速度（转向速度上限，单位：弧度/秒）
+    nh.param("mpc/max_domega", max_domega, -1.0);        // 最大角加速度（角速度变化率上限）
+    nh.param("mpc/max_speed", max_speed, -1.0);          // 最大线速度（前进速度上限，单位：米/秒）
+    nh.param("mpc/max_accel", max_accel, -1.0);          // 最大加速度（线速度变化率上限）
+    nh.param("mpc/tolerance", tolerance, 0.1);           // 到达目标的距离容差（判定是否到达目标点）
+    nh.param("mpc/tv_dist", tv_dist, -1.0);              // TV轨迹点采样距离阈值（用于轨迹稀疏化）
+    nh.param("mpc/in_test", in_test, false);             // 是否处于测试模式（true为测试，false为实车）
+    nh.param("mpc/in_mocap", in_mocap, false);           // 是否使用动捕系统（true为动捕，false为其他定位）
+    nh.param("mpc/in_bk", in_bk, false);                 // 是否处于倒车模式）
+    nh.param("mpc/control_a", control_a, false);         // 是否控制加速度（true为加速度控制，false为速度控制）
+    nh.param<std::vector<double>>("mpc/matrix_q", Q, std::vector<double>());   // MPC代价函数中的状态权重Q
+    nh.param<std::vector<double>>("mpc/matrix_r", R, std::vector<double>());   // MPC代价函数中的输入权重R
+    nh.param<std::vector<double>>("mpc/matrix_rd", Rd, std::vector<double>()); // MPC代价函数中的输入变化率权重Rd
+    nh.param<string>("mpc/test_traj", test_traj, "xxx"); // 测试用轨迹文件路径
 
     cout<<"du_t="<<du_th<<endl;
 
-    has_odom = false;
-    receive_traj_ = false;
+    has_odom = false;//收到里程计信息
+    receive_traj_ = false;//收到轨迹信息
     max_comega = max_domega * dt;
     max_cv = max_accel * dt;
     xref = Eigen::Matrix<double, 4, 500>::Zero(4, 500);
@@ -53,7 +54,7 @@ void MPC::init(ros::NodeHandle &nh)
     vis_pub = nh.advertise<visualization_msgs::Marker>("/following_path", 10);
     predict_pub = nh.advertise<visualization_msgs::Marker>("/predict_path", 10);
     ref_pub = nh.advertise<visualization_msgs::Marker>("/reference_path", 10);
-    cmd_timer_ = nh.createTimer(ros::Duration(0.01), &MPC::cmdCallback, this);
+    cmd_timer_ = nh.createTimer(ros::Duration(0.01), &MPC::cmdCallback, this);//以100hz频率不断调用cmdCallBack函数
     odom_sub_ = nh.subscribe("odom", 1, &MPC::rcvOdomCallBack, this);
     traj_sub_ = nh.subscribe("traj", 1, &MPC::rcvTrajCallBack, this);
     tv_sub_ = nh.subscribe("/TV_path", 1, &MPC::rcvTVPathCallBack, this);
@@ -83,6 +84,7 @@ void MPC::init(ros::NodeHandle &nh)
             traj_analyzer.setTraj(test_traj.c_str());
         }
     }
+    ROS_INFO("MPC init finished.");
 }
 
 void MPC::rcvCloudCallBack(sensor_msgs::PointCloud2ConstPtr msg)
@@ -97,7 +99,7 @@ void MPC::rcvCloudCallBack(sensor_msgs::PointCloud2ConstPtr msg)
         p.y = cloudMap->points[i].y;
         cloudMapZ->points.push_back(p);
     }
-    kdtree.setInputCloud(cloudMapZ);
+    kdtree.setInputCloud(cloudMapZ);//二维点云地图，向下投影
     has_cloud = true;
     ROS_WARN("RcvCloud!");
 }
@@ -246,10 +248,11 @@ void MPC::rcvVelCallBack(diablo_sdk::OSDK_LEGMOTORSConstPtr msg)
 void MPC::cmdCallback(const ros::TimerEvent &e)
 {
     // drawFollowPath();
-    
-    if (!has_odom || !receive_traj_)
+    ROS_INFO("cmdCallback entered.");
+    if (!has_odom || !receive_traj_){
         return;
-
+        ROS_INFO("no odom or traj.");
+    }
     if (in_test && !in_bk)
     {
         ros::Time time_now = ros::Time::now();
@@ -519,6 +522,7 @@ void MPC::cmdCallback(const ros::TimerEvent &e)
     }
     else if (!in_bk && !in_test)
     {
+        ROS_INFO("nt bk mode an not test mode!");
         vector<TrajPoint> P = traj_analyzer.getRefPoints(T, dt);
 
         if (traj_analyzer.at_goal)
@@ -555,6 +559,7 @@ void MPC::cmdCallback(const ros::TimerEvent &e)
             smooth_yaw();
             getCmd();
         }
+        ROS_INFO("finish cmdcallback");
     }
 
     geometry_msgs::Pose cmd_geo;
@@ -566,7 +571,7 @@ void MPC::cmdCallback(const ros::TimerEvent &e)
     pos_cmd_pub_.publish(cmd);
     pos_cmd_pub_geo_.publish(cmd_geo);
     
-    // ROS_INFO("in MPC, the cmd is: a=%f, steer=%f", cmd.speed, cmd.omega);
+    ROS_INFO("in MPC, the cmd is: a=%f, steer=%f", cmd.speed, cmd.omega);
 }
 
 void MPC::getLinearModel(const MPCState& s)

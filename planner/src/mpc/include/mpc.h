@@ -63,6 +63,7 @@ private:
     int T = 5;
     int delay_num;
     int max_iter = 3;
+    //代价函数
     vector<double> Q = {10, 10, 2.5, 0.5};
     vector<double> R = {0.01, 0.01};
     vector<double> Rd = {0.01, 1.0};
@@ -137,6 +138,7 @@ private:
 
     // utils
     MPCState xopt[500];
+    //转换到-180~180
     void normlize_theta(double& th)
     {
         while (th > M_PI)

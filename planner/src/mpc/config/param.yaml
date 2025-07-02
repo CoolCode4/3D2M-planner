@@ -1,40 +1,40 @@
 mpc:
-  du_threshold: 0.001
-  max_iter: 150
+  du_threshold: 0.001           # 控制输入变化的阈值（用于收敛判据）
+  max_iter: 150                 # 最大迭代次数
   # control v minco
-  dt: 0.02
-  predict_steps: 50
+  dt: 0.02                      # 控制周期（时间步长，单位：秒）
+  predict_steps: 50             # 预测步数（MPC预测未来多少步）
   # control v liuming
-  # dt: 0.02
-  # predict_steps: 50
-  delay_num: 0
+  # dt: 0.02                    # 控制周期（备用配置）
+  # predict_steps: 50           # 预测步数（备用配置）
+  delay_num: 0                  # 控制延迟步数（0表示无延迟）
   # control a
-  # predict_steps: 50
-  # delay_num: 10
-  max_omega: 2.3
-  max_domega: 3.0
-  max_speed: 10.0
-  min_speed: -10.0
-  max_accel: 5.0
-  in_test: false
-  in_mocap: true
-  in_bk: false
-  control_a: false
+  # predict_steps: 50           # 控制加速度时的预测步数（备用）
+  # delay_num: 10               # 控制加速度时的延迟步数（备用）
+  max_omega: 1.0                # 最大角速度（rad/s）
+  max_domega: 1.0               # 最大角加速度（rad/s^2）
+  max_speed: 1.0                # 最大线速度（m/s）
+  min_speed: -1.0               # 最小线速度（m/s，允许倒车）
+  max_accel: 1.0                # 最大加速度（m/s^2）
+  in_test: false                # 是否处于测试模式
+  in_mocap: true                # 是否使用mocap（动作捕捉）系统
+  in_bk: false                  # 是否在BK环境下运行
+  control_a: false              # 是否控制加速度（true为控制加速度，false为控制速度）
   # x, y, v yaw
   # control v minco
-  matrix_q: [50.0, 50.0, 2.5, 0.5]
-  matrix_r: [0.1, 0.01]
-  matrix_rd: [0.01, 0.5]
+  matrix_q: [50.0, 50.0, 2.5, 0.5]   # 状态权重矩阵Q（分别对应x, y, v, yaw）
+  matrix_r: [0.1, 0.01]               # 控制输入权重矩阵R
+  matrix_rd: [0.01, 0.5]              # 控制输入变化率权重矩阵Rd
    # control v liuming
-  # matrix_q: [50.0, 50.0, 2.5, 0.5]
-  # matrix_r: [0.1, 0.01]
-  # matrix_rd: [0.01, 0.5]
+  # matrix_q: [50.0, 50.0, 2.5, 0.5]  # 备用状态权重矩阵Q
+  # matrix_r: [0.1, 0.01]              # 备用控制输入权重矩阵R
+  # matrix_rd: [0.01, 0.5]             # 备用控制输入变化率权重矩阵Rd
   # control a
-  # matrix_q: [1.0, 1.0, 5.0, 0.5]
-  # matrix_r: [0.01, 0.01]
-  # matrix_rd: [0.01, 0.01]
-  # test_traj: "/home/xulong/diablo-planner/data/liuming.txt"
-  # test_traj: "/home/xulong/diablo-planner/data/trajs.txt"
-  test_traj: "/home/lantern/ROS_workspace/diablo-planner/data/trajs.txt"
-  tv_dist: 0.5
+  # matrix_q: [1.0, 1.0, 5.0, 0.5]     # 控制加速度时的状态权重矩阵Q（备用）
+  # matrix_r: [0.01, 0.01]             # 控制加速度时的控制输入权重矩阵R（备用）
+  # matrix_rd: [0.01, 0.01]            # 控制加速度时的控制输入变化率权重矩阵Rd（备用）
+  # test_traj: "/home/xulong/diablo-planner/data/liuming.txt"   # 测试轨迹文件路径（备用）
+  # test_traj: "/home/xulong/diablo-planner/data/trajs.txt"     # 测试轨迹文件路径（备用）
+  test_traj: "/home/lantern/ROS_workspace/diablo-planner/data/trajs.txt" # 当前测试轨迹文件路径
+  tv_dist: 0.5                   # 目标点距离阈值（用于判断是否到达目标点）
     

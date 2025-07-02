@@ -5,18 +5,18 @@
 #include <vector>
 
 #include "root_finder.hpp"
-
+// 轨迹工具
 // Polynomial order and trajectory dimension are fixed here
-typedef Eigen::Matrix<double, 3, 6> CoefficientMat;
-typedef Eigen::Matrix<double, 3, 5> VelCoefficientMat;
-typedef Eigen::Matrix<double, 3, 4> AccCoefficientMat;
+typedef Eigen::Matrix<double, 3, 6> CoefficientMat;//三行代表xyz，六列代表系数
+typedef Eigen::Matrix<double, 3, 5> VelCoefficientMat;//一阶系数矩阵代表速度
+typedef Eigen::Matrix<double, 3, 4> AccCoefficientMat;//二阶系数矩阵代表加速度
 
 namespace mpc_utils{
 class Piece {
  private:
   double duration;
   CoefficientMat coeffMat;
-
+//系数矩阵 持续时间
  public:
   Piece() = default;
 
@@ -80,7 +80,7 @@ class Piece {
       acc += m * n * tn * coeffMat.col(i);
       tn *= t;
       m++;
-      n++;
+      n++;//这里m n tn计算过程等于求导，求得一段piece中任意时刻的速度加速度
     }
     return acc;
   }
@@ -136,23 +136,23 @@ class Piece {
     }
     return nAccCoeffMat;
   }
-
+// 计算一个piece里
   inline double getMaxVelRate() const {
     Eigen::MatrixXd nVelCoeffMat = normalizeVelCoeffMat();
     Eigen::VectorXd coeff = RootFinder::polySqr(nVelCoeffMat.row(0)) +
                             RootFinder::polySqr(nVelCoeffMat.row(1)) +
-                            RootFinder::polySqr(nVelCoeffMat.row(2));
+                            RootFinder::polySqr(nVelCoeffMat.row(2));//速度平方和，对其求极点
     int N = coeff.size();
     int n = N - 1;
     for (int i = 0; i < N; i++) {
       coeff(i) *= n;
       n--;
-    }
+    }//求导
     if (coeff.head(N - 1).squaredNorm() < DBL_EPSILON) {
       return 0.0;
     } else {
       double l = -0.0625;
-      double r = 1.0625;
+      double r = 1.0625;//作者选择了一个比 [0, 1] 稍微大一点的区间 [-0.0625, 1.0625] 作为初始搜索范围
       while (fabs(RootFinder::polyVal(coeff.head(N - 1), l)) < DBL_EPSILON) {
         l = 0.5 * l;
       }

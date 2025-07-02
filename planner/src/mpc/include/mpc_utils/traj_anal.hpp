@@ -8,7 +8,7 @@
 #include <fstream>
 #include <iostream>
 
-template <typename T>
+template <typename T>//线性插值
 T lerp(const T &x0, const double t0, const T &x1, const double t1,
        const double t) {
   if (std::abs(t1 - t0) <= 1.0e-6) {
@@ -19,7 +19,7 @@ T lerp(const T &x0, const double t0, const T &x1, const double t1,
   const T x = x0 + r * (x1 - x0);
   return x;
 }
-
+//角度归一化到-180~180
 inline double NormalizeAngle(const double angle) {
   double a = std::fmod(angle + M_PI, 2.0 * M_PI);
   if (a < 0.0) {

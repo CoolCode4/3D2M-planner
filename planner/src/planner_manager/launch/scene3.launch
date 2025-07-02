@@ -60,8 +60,8 @@
 
     <include file="$(find fake_diablo)/launch/fake_diablo.launch">
 		<arg name="odometry_topic"  value="$(arg odom_topic)"/>
-		<arg name="init_x"  value="-20.0"/>
-		<arg name="init_y"  value="-15.0"/>
+		<arg name="init_x"  value="-10.0"/>
+		<arg name="init_y"  value="-1.0"/>
 	</include>
 
 <!-- use program code globalmap generator -->
